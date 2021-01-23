@@ -4,23 +4,26 @@ using UnityEngine.Events;
 using UnityEngine.XR;
 
 [System.Serializable]
-public class PrimaryButtonEvent : UnityEvent<bool> { }
+public class ButtonEvent : UnityEvent<bool> { }
 
 public class PrimaryButtonWatcher : MonoBehaviour
 {
-    public PrimaryButtonEvent primaryButtonPress;
+    public List<ButtonEvent> buttonEvents = new List<ButtonEvent>();
+    private List<bool> previousButtonStates = new List<bool>();
+    private List<InputDevice> controllers;
 
-    private bool lastButtonState = false;
-    private List<InputDevice> devicesWithPrimaryButton;
+    InputFeatureUsage<bool>[] buttons = { CommonUsages.primaryButton, CommonUsages.triggerButton,
+     CommonUsages.gripButton, CommonUsages.menuButton};
 
     private void Awake()
     {
-        if (primaryButtonPress == null)
+        for (int i = 0; i < buttons.Length; i++)
         {
-            primaryButtonPress = new PrimaryButtonEvent();
+            buttonEvents.Add(new ButtonEvent());
+            previousButtonStates.Add(false);
         }
 
-        devicesWithPrimaryButton = new List<InputDevice>();
+        controllers = new List<InputDevice>();
     }
 
     void OnEnable()
@@ -38,7 +41,7 @@ public class PrimaryButtonWatcher : MonoBehaviour
     {
         InputDevices.deviceConnected -= InputDevices_deviceConnected;
         InputDevices.deviceDisconnected -= InputDevices_deviceDisconnected;
-        devicesWithPrimaryButton.Clear();
+        controllers.Clear();
     }
 
     private void InputDevices_deviceConnected(InputDevice device)
@@ -46,31 +49,36 @@ public class PrimaryButtonWatcher : MonoBehaviour
         bool discardedValue;
         if (device.TryGetFeatureValue(CommonUsages.primaryButton, out discardedValue))
         {
-            devicesWithPrimaryButton.Add(device); // Add any devices that have a primary button.
+            controllers.Add(device); // Add any devices that have a primary button.
         }
     }
 
     private void InputDevices_deviceDisconnected(InputDevice device)
     {
-        if (devicesWithPrimaryButton.Contains(device))
-            devicesWithPrimaryButton.Remove(device);
+        if (controllers.Contains(device))
+            controllers.Remove(device);
     }
 
     void Update()
     {
-        bool tempState = false;
-        foreach (var device in devicesWithPrimaryButton)
+        
+        for (int i = 0; i < buttons.Length; i++)
         {
-            bool primaryButtonState = false;
-            tempState = device.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonState) // did get a value
-                        && primaryButtonState // the value we got
-                        || tempState; // cumulative result from other controllers
-        }
+            bool tempState = false;
+            foreach (var device in controllers)
+            {
+                bool currentButtonState = false;
+                tempState = device.TryGetFeatureValue(buttons[i], out currentButtonState) // did get a value
+                            && currentButtonState // the value we got
+                            || currentButtonState; // cumulative result from other controllers
+            }
 
-        if (tempState != lastButtonState) // Button state changed since last frame
-        {
-            primaryButtonPress.Invoke(tempState);
-            lastButtonState = tempState;
+            if (tempState != previousButtonStates[i]) // Button state changed since last frame
+            {
+                buttonEvents[i].Invoke(tempState);
+                previousButtonStates[i] = tempState;
+            }
         }
+        
     }
 }
