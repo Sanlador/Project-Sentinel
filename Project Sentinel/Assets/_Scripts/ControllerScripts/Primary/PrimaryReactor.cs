@@ -11,12 +11,17 @@ public class PrimaryReactor : MonoBehaviour
     void Start()
     {
         //initiate listener from watcher class
-        watcher.buttonEventsLeft[0].AddListener(onPrimaryButtonEventLeft);
-        watcher.buttonEventsLeft[1].AddListener(onSecondaryButtonEventLeft);
-        watcher.buttonEventsLeft[2].AddListener(onGripEventLeft);
-        watcher.buttonEventsRight[0].AddListener(onPrimaryButtonEventRight);
-        watcher.buttonEventsRight[1].AddListener(onSecondaryButtonEventRight);
-        watcher.buttonEventsRight[2].AddListener(onGripEventRight);
+        watcher.boolButtonEventsLeft[0].AddListener(onPrimaryButtonEventLeft);
+        watcher.boolButtonEventsLeft[1].AddListener(onSecondaryButtonEventLeft);
+        watcher.boolButtonEventsLeft[2].AddListener(onGripEventLeft);
+        watcher.boolButtonEventsRight[0].AddListener(onPrimaryButtonEventRight);
+        watcher.boolButtonEventsRight[1].AddListener(onSecondaryButtonEventRight);
+        watcher.boolButtonEventsRight[2].AddListener(onGripEventRight);
+
+        watcher.floatButtonEventsLeft[0].AddListener(onLeftTriggerFloat);
+        watcher.floatButtonEventsRight[0].AddListener(onRightTriggerFloat);
+        watcher.floatButtonEventsLeft[1].AddListener(onLeftGripFloat);
+        watcher.floatButtonEventsRight[1].AddListener(onRightGripFloat);
     }
 
     public void onPrimaryButtonEventLeft(bool pressed)
@@ -69,5 +74,25 @@ public class PrimaryReactor : MonoBehaviour
     public void onGripEventRight(bool pressed)
     {
         Debug.Log("Right grip pressed");
+    }
+
+    public void onLeftGripFloat(float grip)
+    {
+        Debug.Log("Left grip value: " + grip);
+    }
+
+    public void onRightGripFloat(float grip)
+    {
+        Debug.Log("Right grip value: " + grip);
+    }
+
+    public void onLeftTriggerFloat(float grip)
+    {
+        Debug.Log("Left trigger value: " + grip);
+    }
+
+    public void onRightTriggerFloat(float grip)
+    {
+        Debug.Log("Right trigger value: " + grip);
     }
 }

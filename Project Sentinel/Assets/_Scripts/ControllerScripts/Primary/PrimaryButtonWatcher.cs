@@ -4,14 +4,23 @@ using UnityEngine.Events;
 using UnityEngine.XR;
 
 [System.Serializable]
-public class ButtonEvent : UnityEvent<bool> { }
+public class boolButtonEvent : UnityEvent<bool> { }
+public class floatButtonEvent : UnityEvent<float> { }
 
 public class PrimaryButtonWatcher : MonoBehaviour
 {
-    public List<ButtonEvent> buttonEventsLeft = new List<ButtonEvent>();
-    public List<ButtonEvent> buttonEventsRight = new List<ButtonEvent>();
-    private List<bool> previousButtonStatesLeft = new List<bool>();
-    private List<bool> previousButtonStatesRight = new List<bool>();
+    public List<floatButtonEvent> floatButtonEventsLeft = new List<floatButtonEvent>();
+    public List<floatButtonEvent> floatButtonEventsRight = new List<floatButtonEvent>();
+
+    public List<boolButtonEvent> boolButtonEventsLeft = new List<boolButtonEvent>();
+    public List<boolButtonEvent> boolButtonEventsRight = new List<boolButtonEvent>();
+
+    private List<bool> previousBoolButtonStatesLeft = new List<bool>();
+    private List<bool> previousBoolButtonStatesRight = new List<bool>();
+
+    private List<float> previousfloatButtonStatesLeft = new List<float>();
+    private List<float> previousfloatButtonStatesRight = new List<float>();
+
     private List<InputDevice> controllers;
 
     //list of buttons to be used in application; must be manually updated
@@ -23,15 +32,28 @@ public class PrimaryButtonWatcher : MonoBehaviour
         CommonUsages.menuButton
     };
 
+    InputFeatureUsage<float>[] floatButtons =
+    {
+        CommonUsages.trigger,
+        CommonUsages.grip
+    };
+
     private void Awake()
     {
         for (int i = 0; i < boolButtons.Length; i++)
         {
             //must keep separate lists for left and right controllers to allow for differentiation
-            buttonEventsLeft.Add(new ButtonEvent());
-            buttonEventsRight.Add(new ButtonEvent());
-            previousButtonStatesLeft.Add(false);
-            previousButtonStatesRight.Add(false);
+            boolButtonEventsLeft.Add(new boolButtonEvent());
+            boolButtonEventsRight.Add(new boolButtonEvent());
+            previousBoolButtonStatesLeft.Add(false);
+            previousBoolButtonStatesRight.Add(false);
+        }
+        for (int i = 0; i < floatButtons.Length; i++)
+        {
+            floatButtonEventsLeft.Add(new floatButtonEvent());
+            floatButtonEventsRight.Add(new floatButtonEvent());
+            previousfloatButtonStatesLeft.Add(0f);
+            previousfloatButtonStatesRight.Add(0f);
         }
 
         controllers = new List<InputDevice>();
@@ -72,7 +94,7 @@ public class PrimaryButtonWatcher : MonoBehaviour
             controllers.Remove(device);
     }
 
-    private void getButtonStates(List<bool> previousButtonStates, List<ButtonEvent> buttonEvents, List<InputDevice> c, int itr)
+    private void getButtonStates(List<bool> previousButtonStates, List<boolButtonEvent> buttonEvents, List<InputDevice> c, int itr)
     {
         bool tempState = false;
         foreach (var device in c)
@@ -88,6 +110,22 @@ public class PrimaryButtonWatcher : MonoBehaviour
             buttonEvents[itr].Invoke(tempState);
             previousButtonStates[itr] = tempState;
         }
+    }
+
+    private void getButtonStates(List<float> previousButtonStates, List<floatButtonEvent> buttonEvents, List<InputDevice> c, int itr)
+    {
+        bool tempState = false;
+        float currentButtonState = 0f;
+        foreach (var device in c)
+        {
+            tempState = device.TryGetFeatureValue(floatButtons[itr], out currentButtonState);
+        }
+        if (currentButtonState != previousButtonStates[itr])
+        {
+            buttonEvents[itr].Invoke(currentButtonState);
+            previousButtonStates[itr] = currentButtonState;
+        }
+        
     }
 
     void Update()
@@ -115,9 +153,13 @@ public class PrimaryButtonWatcher : MonoBehaviour
         //checks the state of each button from button list
         for (int i = 0; i < boolButtons.Length; i++)
         {
-            getButtonStates(previousButtonStatesLeft, buttonEventsLeft, leftHandedControllers, i);
-            getButtonStates(previousButtonStatesRight, buttonEventsRight, rightHandedControllers, i);
+            getButtonStates(previousBoolButtonStatesLeft, boolButtonEventsLeft, leftHandedControllers, i);
+            getButtonStates(previousBoolButtonStatesRight, boolButtonEventsRight, rightHandedControllers, i);
         }
-        
+        for (int i = 0; i < floatButtons.Length; i++)
+        {
+            getButtonStates(previousfloatButtonStatesLeft, floatButtonEventsLeft, leftHandedControllers, i);
+            getButtonStates(previousfloatButtonStatesRight, floatButtonEventsRight, rightHandedControllers, i);
+        }
     }
 }
