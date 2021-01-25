@@ -6,16 +6,14 @@ using UnityEngine.XR;
 public class ControllerTracker : MonoBehaviour
 {
     private List<InputDevice> inputDevices, leftHandDevices, rightHandDevices;
-    private List<XRNode> nodes;
-    private InputDevice left, right;
     public GameObject leftHand, rightHand;
+    private Vector3 leftPos, rightPos;
 
     void Start()
     {
         //Detect VR controllers
         inputDevices = new List<InputDevice>();
         InputDevices.GetDevices(inputDevices);
-        nodes = new List<XRNode>();
         leftHandDevices = new List<InputDevice>();
         rightHandDevices = new List<InputDevice>();
 
@@ -53,7 +51,6 @@ public class ControllerTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 leftPos, rightPos;
         Quaternion leftRot, rightRot;
         //get left controller transform
         if (leftHandDevices.Count > 0)
@@ -72,5 +69,15 @@ public class ControllerTracker : MonoBehaviour
             rightHand.transform.position = rightPos;
             rightHand.transform.rotation = rightRot;
         }
+    }
+
+    public Vector3 getLeftPos()
+    {
+        return leftPos;
+    }
+
+    public Vector3 getRightPos()
+    {
+        return rightPos;
     }
 }

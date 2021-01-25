@@ -7,8 +7,6 @@ using UnityEngine.XR;
 public class ControlReactor : MonoBehaviour
 {
     public ControlWatcher watcher;
-    public GameObject controllerRig;
-    private GameObject leftHand, rightHand;
 
     //controller inputs
     private bool primaryLeft, primaryRight, secondaryLeft, secondaryRight, gripLeft, gripRight, 
