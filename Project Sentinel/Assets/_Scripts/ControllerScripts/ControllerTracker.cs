@@ -72,7 +72,5 @@ public class ControllerTracker : MonoBehaviour
             rightHand.transform.position = rightPos;
             rightHand.transform.rotation = rightRot;
         }
-
-
     }
 }

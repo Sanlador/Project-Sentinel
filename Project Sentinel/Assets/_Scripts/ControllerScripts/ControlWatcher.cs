@@ -34,9 +34,11 @@ public class ControlWatcher : MonoBehaviour
     InputFeatureUsage<bool>[] boolButtons = 
     { 
         CommonUsages.primaryButton,
+        CommonUsages.secondaryButton,
         CommonUsages.triggerButton, 
         CommonUsages.gripButton, 
-        CommonUsages.menuButton
+        CommonUsages.menuButton,
+        CommonUsages.secondary2DAxisClick
     };
 
     InputFeatureUsage<float>[] floatButtons =
