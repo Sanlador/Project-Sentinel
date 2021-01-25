@@ -6,8 +6,9 @@ using UnityEngine.XR;
 [System.Serializable]
 public class boolButtonEvent : UnityEvent<bool> { }
 public class floatButtonEvent : UnityEvent<float> { }
+public class vectorButtonEvent : UnityEvent<Vector2> { }
 
-public class PrimaryButtonWatcher : MonoBehaviour
+public class ControlWatcher : MonoBehaviour
 {
     public List<floatButtonEvent> floatButtonEventsLeft = new List<floatButtonEvent>();
     public List<floatButtonEvent> floatButtonEventsRight = new List<floatButtonEvent>();
@@ -15,11 +16,17 @@ public class PrimaryButtonWatcher : MonoBehaviour
     public List<boolButtonEvent> boolButtonEventsLeft = new List<boolButtonEvent>();
     public List<boolButtonEvent> boolButtonEventsRight = new List<boolButtonEvent>();
 
+    public List<vectorButtonEvent> vectorButtonEventsLeft = new List<vectorButtonEvent>();
+    public List<vectorButtonEvent> vectorButtonEventsRight = new List<vectorButtonEvent>();
+
     private List<bool> previousBoolButtonStatesLeft = new List<bool>();
     private List<bool> previousBoolButtonStatesRight = new List<bool>();
 
-    private List<float> previousfloatButtonStatesLeft = new List<float>();
-    private List<float> previousfloatButtonStatesRight = new List<float>();
+    private List<float> previousFloatButtonStatesLeft = new List<float>();
+    private List<float> previousFloatButtonStatesRight = new List<float>();
+
+    private List<Vector2> previousVectorButtonStatesLeft = new List<Vector2>();
+    private List<Vector2> previousVectorButtonStatesRight = new List<Vector2>();
 
     private List<InputDevice> controllers;
 
@@ -38,6 +45,12 @@ public class PrimaryButtonWatcher : MonoBehaviour
         CommonUsages.grip
     };
 
+    InputFeatureUsage<Vector2>[] vectorButtons =
+    {
+        CommonUsages.secondary2DAxis,
+        CommonUsages.primary2DAxis
+    };
+
     private void Awake()
     {
         for (int i = 0; i < boolButtons.Length; i++)
@@ -52,8 +65,15 @@ public class PrimaryButtonWatcher : MonoBehaviour
         {
             floatButtonEventsLeft.Add(new floatButtonEvent());
             floatButtonEventsRight.Add(new floatButtonEvent());
-            previousfloatButtonStatesLeft.Add(0f);
-            previousfloatButtonStatesRight.Add(0f);
+            previousFloatButtonStatesLeft.Add(0f);
+            previousFloatButtonStatesRight.Add(0f);
+        }
+        for (int i = 0; i < vectorButtons.Length; i++)
+        {
+            vectorButtonEventsLeft.Add(new vectorButtonEvent());
+            vectorButtonEventsRight.Add(new vectorButtonEvent());
+            previousVectorButtonStatesLeft.Add(new Vector2());
+            previousVectorButtonStatesRight.Add(new Vector2());
         }
 
         controllers = new List<InputDevice>();
@@ -94,6 +114,7 @@ public class PrimaryButtonWatcher : MonoBehaviour
             controllers.Remove(device);
     }
 
+    //bool buttons
     private void getButtonStates(List<bool> previousButtonStates, List<boolButtonEvent> buttonEvents, List<InputDevice> c, int itr)
     {
         bool tempState = false;
@@ -112,6 +133,7 @@ public class PrimaryButtonWatcher : MonoBehaviour
         }
     }
 
+    //float buttons
     private void getButtonStates(List<float> previousButtonStates, List<floatButtonEvent> buttonEvents, List<InputDevice> c, int itr)
     {
         bool tempState = false;
@@ -125,7 +147,24 @@ public class PrimaryButtonWatcher : MonoBehaviour
             buttonEvents[itr].Invoke(currentButtonState);
             previousButtonStates[itr] = currentButtonState;
         }
-        
+
+    }
+
+    //Vector2 Buttons
+    private void getButtonStates(List<Vector2> previousButtonStates, List<vectorButtonEvent> buttonEvents, List<InputDevice> c, int itr)
+    {
+        bool tempState = false;
+        Vector2 currentButtonState = new Vector2();
+        foreach (var device in c)
+        {
+            tempState = device.TryGetFeatureValue(vectorButtons[itr], out currentButtonState);
+        }
+        if (currentButtonState != previousButtonStates[itr])
+        {
+            buttonEvents[itr].Invoke(currentButtonState);
+            previousButtonStates[itr] = currentButtonState;
+        }
+
     }
 
     void Update()
@@ -158,8 +197,13 @@ public class PrimaryButtonWatcher : MonoBehaviour
         }
         for (int i = 0; i < floatButtons.Length; i++)
         {
-            getButtonStates(previousfloatButtonStatesLeft, floatButtonEventsLeft, leftHandedControllers, i);
-            getButtonStates(previousfloatButtonStatesRight, floatButtonEventsRight, rightHandedControllers, i);
+            getButtonStates(previousFloatButtonStatesLeft, floatButtonEventsLeft, leftHandedControllers, i);
+            getButtonStates(previousFloatButtonStatesRight, floatButtonEventsRight, rightHandedControllers, i);
+        }
+        for (int i = 0; i < vectorButtons.Length; i++)
+        {
+            getButtonStates(previousVectorButtonStatesLeft, vectorButtonEventsLeft, leftHandedControllers, i);
+            getButtonStates(previousVectorButtonStatesRight, vectorButtonEventsRight, rightHandedControllers, i);
         }
     }
 }

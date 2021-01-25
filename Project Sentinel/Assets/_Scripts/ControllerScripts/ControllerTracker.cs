@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class ControllerManager : MonoBehaviour
+public class ControllerTracker : MonoBehaviour
 {
     private List<InputDevice> inputDevices, leftHandDevices, rightHandDevices;
     private List<XRNode> nodes;
