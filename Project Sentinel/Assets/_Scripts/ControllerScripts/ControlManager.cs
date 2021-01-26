@@ -9,7 +9,6 @@ public class ControlManager : MonoBehaviour
     private ControllerTracker tracker;
     private ControlReactor input;
 
-    // Start is called before the first frame update
     void Start()
     {
         tracker = rig.GetComponent<ControllerTracker>();
@@ -22,33 +21,92 @@ public class ControlManager : MonoBehaviour
 
     }
 
-    public ControllerToken proximityPress(GameObject interactable, float maxDistance, ControllerToken button)
+
+    /*proximityPress checks if a specified button (bool) has been pressed in proximity to an object
+     * Uses a controller token to alias integers as button id's*/
+    public int proximityPress(GameObject interactable, float maxDistance, int button, int controller)
     {
-        ControllerToken left = new ControllerToken();
-        ControllerToken right = new ControllerToken();
-        ControllerToken none = new ControllerToken();
-        left.c = ControllerToken.controller.left;
-        right.c = ControllerToken.controller.right;
-        none.c = ControllerToken.controller.none;
         float leftDist, rightDist;
         leftDist = Vector3.Distance(tracker.getLeftPos(), interactable.transform.position);
         rightDist = Vector3.Distance(tracker.getRightPos(), interactable.transform.position);
 
-        if (leftDist <= maxDistance && getButtonByToken(button, left))
+        if (controller == ControllerToken.leftController || controller == ControllerToken.controllerAgnostic)
         {
-            return left;
+            if (leftDist <= maxDistance && getButtonByToken(button, ControllerToken.leftController))
+            {
+                return ControllerToken.leftController;
+            }
         }
-        else if (rightDist <= maxDistance && getButtonByToken(button, right))
+        if (controller == ControllerToken.rightController || controller == ControllerToken.controllerAgnostic)
         {
-            return right;
+            if (rightDist <= maxDistance && getButtonByToken(button, ControllerToken.rightController))
+            {
+                return ControllerToken.rightController;
+            }
         }
+        
 
-        return none;
+        return ControllerToken.none;
     }
 
 
-    private bool getButtonByToken(ControllerToken token, ControllerToken c)
+    public bool getButtonByToken(int button, int controller)
     {
-        return true;
+        if (controller == ControllerToken.leftController)
+        {
+            if (button == ControllerToken.primary)
+            {
+                return input.getPrimaryLeft();
+            }
+            else if (button == ControllerToken.secondary)
+            {
+                return input.getSecondaryLeft();
+            }
+            else if (button == ControllerToken.trigger)
+            {
+                return input.getTriggerLeft();
+            }
+            else if (button == ControllerToken.grip)
+            {
+                return input.getGripLeft();
+            }
+            else if (button == ControllerToken.menu)
+            {
+                return input.getMenuLeft();
+            }
+            else if (button == ControllerToken.joystickClick)
+            {
+                return input.getJoystickClickLeft();
+            }
+        }
+        else if (controller == ControllerToken.rightController)
+        {
+            if (button == ControllerToken.primary)
+            {
+                return input.getPrimaryRight();
+            }
+            else if (button == ControllerToken.secondary)
+            {
+                return input.getSecondaryRight();
+            }
+            else if (button == ControllerToken.trigger)
+            {
+                return input.getTriggerRight();
+            }
+            else if (button == ControllerToken.grip)
+            {
+                return input.getGripRight();
+            }
+            else if (button == ControllerToken.menu)
+            {
+                return input.getMenuRight();
+            }
+            else if (button == ControllerToken.joystickClick)
+            {
+                return input.getJoystickClickRight();
+            }
+        }
+
+        return false;
     }
 }

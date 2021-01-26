@@ -117,7 +117,7 @@ public class ControlReactor : MonoBehaviour
         return joystickClickLeft;
     }
 
-    public bool getJoystickCLickRight()
+    public bool getJoystickClickRight()
     {
         return joystickClickRight;
     }

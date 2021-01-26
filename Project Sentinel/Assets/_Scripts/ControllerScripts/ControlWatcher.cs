@@ -38,7 +38,7 @@ public class ControlWatcher : MonoBehaviour
         CommonUsages.triggerButton, 
         CommonUsages.gripButton, 
         CommonUsages.menuButton,
-        CommonUsages.secondary2DAxisClick
+        CommonUsages.primary2DAxisClick
     };
 
     InputFeatureUsage<float>[] floatButtons =
