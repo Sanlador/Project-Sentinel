@@ -5,6 +5,9 @@ using UnityEngine;
 public class FlightStick : MonoBehaviour
 {
     public GameObject rig, left, right;
+    public float distanceThreshold;
+    public bool testMode;
+
     private GameObject controller;
     private ControlManager manager;
     private bool isGripped = false;
@@ -19,38 +22,49 @@ public class FlightStick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGripped && !(manager.proximityPress(gameObject, 0.1f, ControllerToken.grip,
-            ControllerToken.controllerAgnostic) > 0))
+        if (isGripped && !(manager.proximityPress(gameObject, distanceThreshold, ControllerToken.grip,
+            grippingController) == grippingController))
         {
+            Debug.Log("Test");
             isGripped = false;
-            gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-            left.SetActive(true);
-            right.SetActive(true);
+            //-.7 is the quaternion value equivilent to -90 degrees
+            gameObject.transform.rotation = new Quaternion(-.7f, 0, 0, .7f);
+            if (!testMode)
+            {
+                left.SetActive(true);
+                right.SetActive(true);
+            }
+            
         }
         else if (isGripped)
         {
-            gameObject.transform.rotation = controller.transform.rotation;
+            gameObject.transform.LookAt(controller.transform);
         }
-        
-
-        if (!isGripped && 
-            (manager.proximityPress(gameObject, 1f, ControllerToken.grip, 
-            ControllerToken.controllerAgnostic) > 0))
+        else
         {
-            isGripped = true;
-            grippingController = manager.proximityPress(gameObject, 0.1f, ControllerToken.grip,
-            ControllerToken.controllerAgnostic);
+            if (!isGripped &&
+            (manager.proximityPress(gameObject, distanceThreshold, ControllerToken.grip,
+            ControllerToken.controllerAgnostic) > 0))
+            {
+                isGripped = true;
+                grippingController = manager.proximityPress(gameObject, distanceThreshold, ControllerToken.grip,
+                ControllerToken.controllerAgnostic);
 
-            if (grippingController == ControllerToken.leftController)
-            {
-                controller = manager.rig.GetComponent<ControllerTracker>().leftHand;
-                left.SetActive(false);
-            }
-            else
-            {
-                controller = manager.rig.GetComponent<ControllerTracker>().rightHand;
-                right.SetActive(false);
+                if (grippingController == ControllerToken.leftController)
+                {
+                    controller = manager.rig.GetComponent<ControllerTracker>().leftHand;
+                    if (!testMode)
+                        left.SetActive(false);
+                }
+                else
+                {
+                    controller = manager.rig.GetComponent<ControllerTracker>().rightHand;
+                    if (!testMode)
+                        right.SetActive(false);
+                }
             }
         }
+
+        
     }
 }
