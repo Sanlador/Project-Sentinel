@@ -1591,3 +1591,238 @@ System memory in use after: 92.6 MB.
 Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2546.
 Total: 2.496100 ms (FindLiveObjects: 0.273800 ms CreateObjectMapping: 0.090500 ms MarkObjects: 2.084700 ms  DeleteObjects: 0.045600 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006651 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.354 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.04 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.5 MB.
+System memory in use after: 92.6 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2549.
+Total: 2.381600 ms (FindLiveObjects: 0.254400 ms CreateObjectMapping: 0.082400 ms MarkObjects: 2.010800 ms  DeleteObjects: 0.032100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006680 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.20 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.389 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.39 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.9 MB.
+System memory in use after: 92.0 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2552.
+Total: 2.425900 ms (FindLiveObjects: 0.299500 ms CreateObjectMapping: 0.082700 ms MarkObjects: 2.011800 ms  DeleteObjects: 0.030300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006961 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.06 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.205 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.05 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.1 MB.
+System memory in use after: 92.2 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2555.
+Total: 2.510300 ms (FindLiveObjects: 0.414600 ms CreateObjectMapping: 0.109400 ms MarkObjects: 1.957900 ms  DeleteObjects: 0.026500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008979 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.65 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.491 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.13 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.4 MB.
+System memory in use after: 92.5 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2558.
+Total: 2.862300 ms (FindLiveObjects: 0.408300 ms CreateObjectMapping: 0.097900 ms MarkObjects: 2.322400 ms  DeleteObjects: 0.032100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006411 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.335 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.5 MB.
+System memory in use after: 92.6 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2561.
+Total: 2.526900 ms (FindLiveObjects: 0.443800 ms CreateObjectMapping: 0.109800 ms MarkObjects: 1.942300 ms  DeleteObjects: 0.029300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008103 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.25 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.09 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.408 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.8 MB.
+System memory in use after: 91.9 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2564.
+Total: 2.460400 ms (FindLiveObjects: 0.275900 ms CreateObjectMapping: 0.088300 ms MarkObjects: 2.060000 ms  DeleteObjects: 0.034600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007214 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.73 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.09 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.506 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.15 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.1 MB.
+System memory in use after: 92.2 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2567.
+Total: 2.841700 ms (FindLiveObjects: 0.440700 ms CreateObjectMapping: 0.140200 ms MarkObjects: 2.219800 ms  DeleteObjects: 0.038700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006159 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.475 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.3 MB.
+System memory in use after: 92.4 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2570.
+Total: 2.955300 ms (FindLiveObjects: 0.255100 ms CreateObjectMapping: 0.082000 ms MarkObjects: 2.574200 ms  DeleteObjects: 0.042300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006291 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.261 seconds
+Platform modules already initialized, skipping
+Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
+Refreshing native plugins compatible for Editor in 1.03 ms, found 7 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 1868 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 92.5 MB.
+System memory in use after: 92.6 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2573.
+Total: 2.300300 ms (FindLiveObjects: 0.260800 ms CreateObjectMapping: 0.082300 ms MarkObjects: 1.916400 ms  DeleteObjects: 0.039500 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

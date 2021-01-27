@@ -27,8 +27,7 @@ public class FlightStick : MonoBehaviour
         {
             Debug.Log("Test");
             isGripped = false;
-            //-.7 is the quaternion value equivilent to -90 degrees
-            gameObject.transform.rotation = new Quaternion(-.7f, 0, 0, .7f);
+            gameObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
             if (!testMode)
             {
                 left.SetActive(true);
