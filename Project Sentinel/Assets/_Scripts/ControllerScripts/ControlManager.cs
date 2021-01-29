@@ -21,6 +21,14 @@ public class ControlManager : MonoBehaviour
 
     }
 
+    public GameObject getController(int controller)
+    {
+        if (controller == 1)
+            return tracker.leftHand;
+        else
+            return tracker.rightHand;
+    }
+
 
     /*proximityPress checks if a specified button (bool) has been pressed in proximity to an object
      * Uses a controller token to alias integers as button id's*/

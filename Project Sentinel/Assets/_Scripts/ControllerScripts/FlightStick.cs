@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FlightStick : MonoBehaviour
 {
-    public GameObject rig, left, right;
+    public GameObject rig;
+    private GameObject left, right;
     public float distanceThreshold;
     public bool testMode;
 
@@ -12,11 +13,15 @@ public class FlightStick : MonoBehaviour
     private ControlManager manager;
     private bool isGripped = false;
     private int grippingController;
+    private Vector2 stickVector;
 
     // Start is called before the first frame update
     void Start()
     {
         manager = rig.GetComponent<ControlManager>();
+        left = manager.getController(ControllerToken.leftController);
+        right = manager.getController(ControllerToken.rightController);
+        stickVector = new Vector2(0f, 0f);
     }
 
     // Update is called once per frame
@@ -25,19 +30,26 @@ public class FlightStick : MonoBehaviour
         if (isGripped && !(manager.proximityPress(gameObject, distanceThreshold, ControllerToken.grip,
             grippingController) == grippingController))
         {
-            Debug.Log("Test");
             isGripped = false;
-            gameObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            stickVector.x = 0f;
+            stickVector.y = 0f;
             if (!testMode)
             {
                 left.SetActive(true);
                 right.SetActive(true);
             }
-            
         }
         else if (isGripped)
         {
-            gameObject.transform.LookAt(controller.transform);
+            float x, y, z;
+            gameObject.transform.LookAt(controller.transform, Vector3.back);
+            gameObject.transform.Rotate(90, 0, 0);
+
+            Vector3 direction = gameObject.transform.rotation * Vector3.up;
+            stickVector.x = direction.x;
+            stickVector.y = direction.z;
+            //Debug.Log(direction);
         }
         else
         {
@@ -63,7 +75,10 @@ public class FlightStick : MonoBehaviour
                 }
             }
         }
+    }
 
-        
+    public Vector2 getStickVector()
+    {
+        return stickVector;
     }
 }
