@@ -42,7 +42,6 @@ public class FlightStick : MonoBehaviour
         }
         else if (isGripped)
         {
-            float x, y, z;
             gameObject.transform.LookAt(controller.transform, Vector3.back);
             gameObject.transform.Rotate(90, 0, 0);
 
