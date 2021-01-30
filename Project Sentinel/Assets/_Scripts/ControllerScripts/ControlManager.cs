@@ -27,9 +27,14 @@ public class ControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        getButtonStates();
+    }
 
-        //checks every frame to see if any given button state has changed, in order to determine if a
-        //button toggle has occured
+
+    //checks every frame to see if any given button state has changed, in order to determine if a
+    //button toggle has occured
+    private void getButtonStates()
+    {
         if (primaryLeftState != input.getPrimaryLeft())
             primaryLeftChanged = true;
         else
@@ -116,12 +121,19 @@ public class ControlManager : MonoBehaviour
 
     public GameObject getController(int controller)
     {
-        if (controller == 1 && tracker.leftHand != null)
-            return tracker.leftHand;
-        else if (controller == 2 && tracker.rightHand != null)
-            return tracker.rightHand;
-        else
-            return null;
+        try
+        {
+            if (controller == 1 && tracker.leftHand != null)
+                return tracker.leftHand;
+            else if (controller == 2 && tracker.rightHand != null)
+                return tracker.rightHand;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+        
+        return null;
     }
 
     /*proximityPress checks if a specified button (bool) has been pressed in proximity to an object

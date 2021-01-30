@@ -6,9 +6,12 @@ public class Flight : MonoBehaviour
 {
     public GameObject flightStick, manager;
     // Start is called before the first frame update
-    public float movementSpeed = 1f;
-    public float rotationSpeed = 20f;
-    private bool mode = true;
+    public float speedLimit = 1f;
+    public float drag = 0.03f;
+    public float acc = .05f;
+    
+    private float xSpeed = 0f, ySpeed = 0f, speed = 0f;
+
     void Start()
     {
         
@@ -17,24 +20,33 @@ public class Flight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //get joystick vector
         float x, y;
         x = flightStick.GetComponent<FlightStick>().getStickVector().x;
         y = flightStick.GetComponent<FlightStick>().getStickVector().y;
-        float deltaTime = Time.deltaTime;
+        Debug.Log(new Vector2(x, y));
 
-        if (manager.GetComponent<ControlManager>().getButtonByToken
-            (ControllerToken.primary, ControllerToken.rightController, true))
+        xSpeed += x * acc;
+        ySpeed += y * acc;
+        speed = Mathf.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
+
+        if (speed > 0f)
         {
-            mode = !mode;
+            xSpeed -= drag;
+            ySpeed -= drag;
         }
-        if (mode)
+
+        if (speed > speedLimit)
         {
-            Vector3 delta = new Vector3(deltaTime * x * movementSpeed, 0f, deltaTime * y * movementSpeed);
-            gameObject.transform.position += delta;
+            Vector2 speedVec = speedLimit * new Vector2(x, y);
+            xSpeed = speedVec.x;
+            ySpeed = speedVec.y;
         }
-        else 
-        {
-            gameObject.transform.Rotate(y * deltaTime * rotationSpeed, 0, -x * deltaTime * rotationSpeed);
-        }
+
+        //apply movement
+        float deltaTime = Time.deltaTime;
+        Vector3 delta = new Vector3(deltaTime * xSpeed, 0f, deltaTime * ySpeed);
+        gameObject.transform.position += delta;
+        
     }
 }
