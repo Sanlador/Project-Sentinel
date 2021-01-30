@@ -23,10 +23,9 @@ public class Flight : MonoBehaviour
         float deltaTime = Time.deltaTime;
 
         if (manager.GetComponent<ControlManager>().getButtonByToken
-            (ControllerToken.primary, ControllerToken.rightController))
+            (ControllerToken.primary, ControllerToken.rightController, true))
         {
             mode = !mode;
-            Debug.Log(mode);
         }
         if (mode)
         {

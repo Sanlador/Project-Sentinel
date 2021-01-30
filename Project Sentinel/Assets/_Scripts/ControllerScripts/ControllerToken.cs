@@ -16,4 +16,6 @@ public static class ControllerToken
     public const int grip = 40;
     public const int menu = 50;
     public const int joystickClick = 60;
+
+    public const int togglePress = 999;
 }
