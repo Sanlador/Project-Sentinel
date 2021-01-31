@@ -6,12 +6,15 @@ using UnityEngine.XR;
 public class ControllerTracker : MonoBehaviour
 {
     private List<InputDevice> inputDevices, leftHandDevices, rightHandDevices;
-    private Vector3 leftPos, rightPos;
-    public GameObject leftHand, rightHand, referencePoint;
-    public bool mobileReference;
+    private Vector3 leftPos, rightPos, posOffset, previousPosition;
+    public GameObject leftHand, rightHand;
+
 
     void Start()
     {
+        posOffset = new Vector3(0, 0, 0);
+        previousPosition = gameObject.transform.position;
+
         //Detect VR controllers
         inputDevices = new List<InputDevice>();
         InputDevices.GetDevices(inputDevices);
@@ -50,20 +53,18 @@ public class ControllerTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion leftRot, rightRot;
-        //get left controller transform
+        if (gameObject.transform.position != previousPosition)
+            posOffset = gameObject.transform.position - previousPosition;
+        else
+            posOffset = new Vector3(0, 0, 0);
 
-        if (mobileReference)
-        {
-            leftPos += referencePoint.transform.position;
-            rightPos += referencePoint.transform.position;
-        }
+        Quaternion leftRot, rightRot;
 
         if (leftHandDevices.Count > 0)
         {
             leftHandDevices[0].TryGetFeatureValue(CommonUsages.devicePosition, out leftPos);
             leftHandDevices[0].TryGetFeatureValue(CommonUsages.deviceRotation, out leftRot);
-            leftHand.transform.position = leftPos;
+            leftHand.transform.position = leftPos + posOffset;
             leftHand.transform.rotation = leftRot;
         }
 
@@ -72,7 +73,7 @@ public class ControllerTracker : MonoBehaviour
         {
             rightHandDevices[0].TryGetFeatureValue(CommonUsages.devicePosition, out rightPos);
             rightHandDevices[0].TryGetFeatureValue(CommonUsages.deviceRotation, out rightRot);
-            rightHand.transform.position = rightPos;
+            rightHand.transform.position = rightPos + posOffset;
             rightHand.transform.rotation = rightRot;
         }
 
