@@ -6,8 +6,9 @@ using UnityEngine.XR;
 public class ControllerTracker : MonoBehaviour
 {
     private List<InputDevice> inputDevices, leftHandDevices, rightHandDevices;
-    public GameObject leftHand, rightHand;
     private Vector3 leftPos, rightPos;
+    public GameObject leftHand, rightHand, referencePoint;
+    public bool mobileReference;
 
     void Start()
     {
@@ -44,8 +45,6 @@ public class ControllerTracker : MonoBehaviour
         {
             Debug.Log("Found no right-handed devices.");
         }
-
-
     }
 
     // Update is called once per frame
@@ -53,6 +52,13 @@ public class ControllerTracker : MonoBehaviour
     {
         Quaternion leftRot, rightRot;
         //get left controller transform
+
+        if (mobileReference)
+        {
+            leftPos += referencePoint.transform.position;
+            rightPos += referencePoint.transform.position;
+        }
+
         if (leftHandDevices.Count > 0)
         {
             leftHandDevices[0].TryGetFeatureValue(CommonUsages.devicePosition, out leftPos);
@@ -69,6 +75,7 @@ public class ControllerTracker : MonoBehaviour
             rightHand.transform.position = rightPos;
             rightHand.transform.rotation = rightRot;
         }
+
     }
 
     public Vector3 getLeftPos()

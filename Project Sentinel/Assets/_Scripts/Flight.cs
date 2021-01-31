@@ -24,7 +24,7 @@ public class Flight : MonoBehaviour
         float x, y;
         x = flightStick.GetComponent<FlightStick>().getStickVector().x;
         y = flightStick.GetComponent<FlightStick>().getStickVector().y;
-        Debug.Log(new Vector2(x, y));
+
 
         xSpeed += x * acc;
         ySpeed += y * acc;
@@ -32,8 +32,36 @@ public class Flight : MonoBehaviour
 
         if (speed > 0f)
         {
-            xSpeed -= drag;
-            ySpeed -= drag;
+            if (Mathf.Abs(xSpeed) > 0f)
+            {
+                if (xSpeed > 0f)
+                {
+                    xSpeed -= drag;
+                    if (xSpeed < 0f)
+                        xSpeed = 0f;
+                }
+                else
+                {
+                    xSpeed += drag;
+                    if (xSpeed > 0f)
+                        xSpeed = 0f;
+                }
+            }
+            if (Mathf.Abs(ySpeed) > 0f)
+            {
+                if (ySpeed > 0f)
+                {
+                    ySpeed -= drag;
+                    if (ySpeed < 0f)
+                        ySpeed = 0f;
+                }
+                else
+                {
+                    ySpeed += drag;
+                    if (ySpeed > 0f)
+                        ySpeed = 0f;
+                }
+            }
         }
 
         if (speed > speedLimit)

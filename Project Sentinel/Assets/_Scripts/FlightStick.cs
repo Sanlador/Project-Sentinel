@@ -19,8 +19,6 @@ public class FlightStick : MonoBehaviour
     void Start()
     {
         manager = rig.GetComponent<ControlManager>();
-        left = manager.getController(ControllerToken.leftController);
-        right = manager.getController(ControllerToken.rightController);
         stickVector = new Vector2(0f, 0f);
     }
 

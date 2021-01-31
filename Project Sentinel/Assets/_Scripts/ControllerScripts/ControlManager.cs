@@ -119,22 +119,7 @@ public class ControlManager : MonoBehaviour
         joystickClickRightState = input.getJoystickClickRight();
     }
 
-    public GameObject getController(int controller)
-    {
-        try
-        {
-            if (controller == 1 && tracker.leftHand != null)
-                return tracker.leftHand;
-            else if (controller == 2 && tracker.rightHand != null)
-                return tracker.rightHand;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-        }
-        
-        return null;
-    }
+    
 
     /*proximityPress checks if a specified button (bool) has been pressed in proximity to an object
      * Uses a controller token to alias integers as button id's*/
